@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import './App.css'
 import Die from '../components/Die'
 import { nanoid } from 'nanoid'
+import Confetti from "react-confetti"
+// import Confetti from 'react-confetti/dist/types/Confetti'
 
 function App() {
   const [count, setCount] = useState(allNewDice())
@@ -33,7 +35,7 @@ function App() {
 setCount(prev=>newcount)
   }
   function rollDice(){
-    setCount(prevDice=>prevDice.map(el=>{return el.isHeld? el:roll()}))
+   return  tenzies? setCount(allNewDice()):setCount(prevDice=>prevDice.map(el=>{return el.isHeld? el:roll()}))
     // console.log(count)
   }
   useEffect(
@@ -43,7 +45,11 @@ setCount(prev=>newcount)
  let sameValue = count.every(el=>el.value==value)
 if(allHeld && sameValue){
   setTenzies(true)
-  console.log('you won')
+  // setCount(allNewDice())
+ 
+  
+}else{
+  setTenzies(false)
 }
 
 },
@@ -54,13 +60,14 @@ if(allHeld && sameValue){
   return (
 
     <div className="App ">
+      {tenzies && <Confetti/>}
        <h1 className="title">Tenzies</h1>
             <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
     <div className="dice-container ">
       {count.map((el, index)=>  <Die key={index} value={el.value} className={`${el.isHeld? 'bg-green-500':'bg-white'}`} id={el.id} holdDice={()=>holdDices(el.id)} />)}
             </div>
 
-            <button className="roll-dice" onClick={rollDice}>Roll Dice</button>
+            <button className="roll-dice" onClick={rollDice}>{tenzies? 'New Game':'Roll Dice'}</button>
      
     </div>
   )
