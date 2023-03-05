@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
 import Die from '../components/Die'
 import { nanoid } from 'nanoid'
 import Confetti from "react-confetti"
-// import Confetti from 'react-confetti/dist/types/Confetti'
+
 
 function App() {
   const [count, setCount] = useState(allNewDice())
@@ -36,7 +35,7 @@ setCount(prev=>newcount)
   }
   function rollDice(){
    return  tenzies? setCount(allNewDice()):setCount(prevDice=>prevDice.map(el=>{return el.isHeld? el:roll()}))
-    // console.log(count)
+
   }
   useEffect(
 ()=>{
@@ -45,7 +44,7 @@ setCount(prev=>newcount)
  let sameValue = count.every(el=>el.value==value)
 if(allHeld && sameValue){
   setTenzies(true)
-  // setCount(allNewDice())
+
  
   
 }else{
