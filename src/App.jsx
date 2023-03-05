@@ -6,17 +6,16 @@ import Confetti from "react-confetti"
 
 
 function App() {
-  const [count, setCount] = useState(allNewDice())
+  const  roll=()=>{
+    return ({ value:Math.ceil(Math.random()*6),
+      isHeld:false,
+       id:nanoid()})
+   }
+
+  const [count, setCount] = useState(()=>allNewDice())
   const [tenzies, setTenzies] = useState(false)
- function roll(){
- 
-  let random ={
-    value:Math.ceil(Math.random()*6),
-     isHeld:false,
-      id:nanoid()
-    }
- return random
- }
+
+
   function allNewDice(){
     let i=1;
     let arr=[]
@@ -44,9 +43,6 @@ setCount(prev=>newcount)
  let sameValue = count.every(el=>el.value==value)
 if(allHeld && sameValue){
   setTenzies(true)
-
- 
-  
 }else{
   setTenzies(false)
 }
@@ -54,7 +50,7 @@ if(allHeld && sameValue){
 },
 
     [count])
-  console.log(count, 'initial')
+
 
   return (
 
